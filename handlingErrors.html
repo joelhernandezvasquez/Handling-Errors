@@ -1,0 +1,74 @@
+<html>
+
+
+<head>
+
+</head>
+
+<body>
+
+    <script>
+ 
+//    fetch('https://api.github.com/user/repos',
+//    {
+//        method:'post'
+//    })
+
+    //  fetch('https://api.github.com/user/repos')
+    //  .then(response => 
+    //  {
+    //      return response.json()
+    //  })
+    //  .then(body => 
+    //  {
+    //    if(response.ok)
+    //    return body;
+           
+    //     return Promise.reject({body});
+       
+    //  })
+
+    //  .then(body => console.log(`body is`,body))
+    //  .catch(error => console.log(`error is`,error))
+
+    //Send a Fetch request that results in an error. Handle the error. 
+
+    fetch('https://api.github.com/user/repos')
+    .then(response =>  
+    {
+      return response.json()
+    })
+    .then(body => 
+    {
+        if(response.ok)
+        return body;
+
+        return Promise.reject({body});
+    })
+
+    .then(body => console.log(`body is `,body) )
+    .catch(error => console.log(`error is`,error))
+
+    //Send an XHR request that results in an error. Handle the error.
+
+    const request = new XMLHttpRequest();
+
+    request.addEventListener("load",e=>
+    {
+        const response = e.target;
+
+        if(response.status >=400)
+        {
+            const error = JSON.parse(response.response);
+            console.log(error);
+        }
+    })
+    request.open('Get','https://api.github.com/user/repos');
+    request.send();
+
+
+    </script>
+
+</body>
+
+</html>
